@@ -18,12 +18,15 @@ if(!list) {
   return false;
 }
 
+const base = env.APP_BASE || '/';
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mailgun = require('mailgun-js')(mailgunConfig);
 
 const app = express();
+const mailing = express();
 
 const whitelist = env.WHITELIST_DOMAINS ?
   env.WHITELIST_DOMAINS.split(',').map(s => s.trim()) :
@@ -78,11 +81,11 @@ const parseSubscription = function (req, res, next) {
   next();
 };
 
-app.post('/validate', validateEmail, function(req, res) {
+mailing.post('/validate', validateEmail, function(req, res) {
   res.send('ok');
 });
 
-app.post('/subscribe',
+mailing.post('/subscribe',
   validateName,
   validateEmail,
   parseSubscription,
@@ -99,6 +102,8 @@ app.post('/subscribe',
       });
   }
 );
+
+app.use(base, mailing);
 
 const port = env.PORT || 3000;
 app.listen(port, function() {

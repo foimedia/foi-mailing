@@ -8,6 +8,7 @@ Small docker-ready express server to handle Mailgun mailing subscriptions.
 
 ### Environment variables
 
+ - `APP_BASE` - App base path
  - `MAILGUN_DOMAIN` - Your Mailgun domain
  - `MAILGUN_API_KEY` - Your Mailgun api key
  - `MAILGUN_PUBLIC_API_KEY` - Your Mailgun public api key
