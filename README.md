@@ -1,6 +1,6 @@
 # FOI Mailing
 
-  Small express server to handle Mailgun mailing subscriptions
+Small docker-ready express server to handle Mailgun mailing subscriptions.
 
 ---
 
@@ -13,3 +13,33 @@
  - `MAILGUN_PUBLIC_API_KEY` - Your Mailgun public api key
  - `MAILGUN_MAILING_LIST` - Your Mailgun mailing list
  - `WHITELIST_DOMAINS` - Comma-separated list of CORS allowed domains
+
+## Usage
+
+### API Endpoints
+
+#### POST /subscribe
+
+Subscribes user to mailing list.
+
+**Body**
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "custom_variable": "goes to mailgun variables"
+}
+```
+
+#### POST /validate
+
+Mailgun email validation.
+
+**Body**
+
+```json
+{
+  "email": "john@example.com"
+}
+```
