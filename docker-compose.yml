@@ -1,0 +1,21 @@
+version: '2'
+services:
+  app:
+    image: miguelpeixe/foi-mailing:latest
+    # Comment-out below to pull image from docker hub
+    build: .
+    # Comment-out below for production
+    command: nodemon index.js
+    ports:
+    - 3000:3000
+    volumes:
+    # Development volumes. Comment-out for production
+    - /src/node_modules
+    - .:/src
+    environment:
+      NODE_ENV: development
+      MAILGUN_DOMAIN: example.com
+      MAILGUN_API_KEY: key-12345678901234567890123456789012
+      MAILGUN_PUBLIC_API_KEY: pubkey-12345678901234567890123456789012
+      MAILGUN_MAILING_LIST: list@example.com
+      WHITELIST_DOMAINS: https://form.example.com, https://www.example.com
